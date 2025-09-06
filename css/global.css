@@ -1,0 +1,308 @@
+/* ============
+   GLOBAL STYLES & EXCEPTIONS
+   CUBE CSS Layer - Base styles and exceptions
+   ============ */
+
+/* Global base styles */
+* {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  max-width: 40em;
+}
+
+/* Global link styles */
+a[href] {
+  color: var(--color-text-link);
+  transition: var(--transition-base);
+}
+
+a[href]:visited {
+  color: var(--color-text-link-visited);
+}
+
+a[href]:hover,
+a[href]:focus {
+  color: var(--color-text-link-hover);
+}
+
+/* Global media defaults */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[width][height] {
+  height: auto;
+}
+
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+video,
+iframe {
+  width: 100%;
+  height: auto;
+}
+
+iframe {
+  aspect-ratio: 16/9;
+}
+
+/* Global typography defaults */
+p {
+  line-height: var(--line-height-base);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+li {
+  line-height: var(--line-height-base);
+}
+
+/* Global code styles */
+pre,
+code {
+  font-family: var(--font-family-mono);
+}
+
+pre:not([class*="language-"]) {
+  margin: var(--space-2xs) 0;
+  line-height: 1.375;
+  tab-size: var(--syntax-tab-size);
+  hyphens: none;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  overflow-x: auto;
+}
+
+code {
+  word-break: break-all;
+}
+
+/* Global table styles */
+table {
+  margin: var(--space-s) 0;
+}
+
+table td,
+table th {
+  padding-right: var(--space-s);
+}
+
+/* EXCEPTIONS - Deviations from the norm */
+
+/* Exception: First child in main should not have top margin */
+main :first-child {
+  margin-top: 0;
+}
+
+/* Exception: Content area spacing */
+main,
+footer {
+  padding: var(--space-s);
+}
+
+/* Exception: Skip link positioning override */
+#skip-link.visually-hidden:focus {
+  position: absolute;
+  top: var(--space-s);
+  left: var(--space-s);
+  z-index: 999;
+}
+
+/* Exception: Legacy class names for existing content */
+/* These provide backwards compatibility while transitioning to CUBE CSS */
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Legacy post list compatibility */
+.postlist {
+  counter-reset: start-from var(--postlist-index);
+  list-style: none;
+  padding: 0;
+  padding-left: var(--space-m);
+}
+
+.postlist-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  counter-increment: start-from -1;
+  margin-bottom: var(--space-s);
+}
+
+.postlist-item:before {
+  display: inline-block;
+  pointer-events: none;
+  content: "" counter(start-from, decimal-leading-zero) ". ";
+  line-height: 100%;
+  text-align: right;
+  margin-left: calc(-1 * var(--space-m));
+}
+
+.postlist-date,
+.postlist-item:before {
+  font-size: var(--font-size-0);
+  color: var(--color-gray-90);
+}
+
+.postlist-date {
+  word-spacing: -0.5px;
+}
+
+.postlist-link {
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-bold);
+  flex-basis: calc(100% - var(--space-m));
+  padding-left: var(--space-3xs);
+  padding-right: var(--space-2xs);
+  text-underline-position: from-font;
+  text-underline-offset: 0;
+  text-decoration-thickness: 1px;
+}
+
+.postlist-item-active .postlist-link {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Legacy navigation */
+.nav {
+  display: flex;
+  gap: var(--space-2xs) var(--space-s);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.nav-item {
+  display: inline-block;
+}
+
+.nav-item a[href]:not(:hover) {
+  text-decoration: none;
+}
+
+.nav a[href][aria-current="page"] {
+  text-decoration: underline;
+}
+
+/* Legacy header */
+header {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-s);
+  border-bottom: 1px dashed var(--color-gray-20);
+}
+
+.home-link {
+  flex-grow: 1;
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-bold);
+}
+
+.home-link:link:not(:hover) {
+  text-decoration: none;
+}
+
+/* Legacy post metadata */
+.post-metadata {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-metadata time {
+  margin-right: var(--space-s);
+}
+
+/* Legacy post tag */
+.post-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.postlist-item > .post-tag {
+  align-self: center;
+}
+
+/* Legacy next/prev links */
+.links-nextprev {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2xs) var(--space-s);
+  list-style: none;
+  border-top: 1px dashed var(--color-gray-20);
+  padding: var(--space-s) 0;
+}
+
+.links-nextprev > * {
+  flex-grow: 1;
+}
+
+.links-nextprev-next {
+  text-align: right;
+}
+
+/* Legacy message box */
+.message-box {
+  --color-message-box: var(--color-bg-secondary);
+  
+  display: block;
+  background-color: var(--color-message-box);
+  color: var(--color-text-primary);
+  padding: var(--space-s) var(--space-xs);
+}
+
+.message-box ol {
+  margin-top: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .message-box {
+    --color-message-box: var(--color-bg-code);
+  }
+}

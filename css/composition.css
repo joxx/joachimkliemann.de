@@ -1,0 +1,173 @@
+/* ===============
+   COMPOSITION
+   CUBE CSS Layer - Layout primitives
+   =============== */
+
+/* Box - Controls internal spacing */
+.box {
+  padding: var(--box-padding, var(--space-s));
+}
+
+.box[data-size="s"] {
+  --box-padding: var(--space-2xs);
+}
+
+.box[data-size="m"] {
+  --box-padding: var(--space-s);
+}
+
+.box[data-size="l"] {
+  --box-padding: var(--space-l);
+}
+
+/* Center - Centers content with optional max-width */
+.center {
+  box-sizing: content-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--center-max-width, 40em);
+  padding-left: var(--center-padding, var(--space-s));
+  padding-right: var(--center-padding, var(--space-s));
+}
+
+.center[data-intrinsic] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cluster - Groups items with consistent spacing */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cluster-gap, var(--space-s));
+  justify-content: var(--cluster-justify, flex-start);
+  align-items: var(--cluster-align, center);
+}
+
+.cluster[data-justify="center"] {
+  --cluster-justify: center;
+}
+
+.cluster[data-justify="space-between"] {
+  --cluster-justify: space-between;
+}
+
+/* Stack - Vertical rhythm between elements */
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--stack-gap, var(--space-s));
+}
+
+.stack[data-split] {
+  justify-content: space-between;
+  min-height: var(--stack-min-height, 100vh);
+}
+
+.stack[data-size="2xs"] {
+  --stack-gap: var(--space-2xs);
+}
+
+.stack[data-size="xs"] {
+  --stack-gap: var(--space-xs);
+}
+
+.stack[data-size="s"] {
+  --stack-gap: var(--space-s);
+}
+
+.stack[data-size="m"] {
+  --stack-gap: var(--space-m);
+}
+
+.stack[data-size="l"] {
+  --stack-gap: var(--space-l);
+}
+
+.stack[data-size="xl"] {
+  --stack-gap: var(--space-xl);
+}
+
+/* Sidebar - Flexible sidebar layout */
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sidebar-gap, var(--space-s));
+}
+
+.sidebar > :first-child {
+  flex-basis: var(--sidebar-basis, 20rem);
+  flex-grow: 1;
+}
+
+.sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: var(--sidebar-min-width, 50%);
+}
+
+.sidebar[data-direction="rtl"] {
+  flex-direction: row-reverse;
+}
+
+/* Reel - Horizontal scrollable container */
+.reel {
+  display: flex;
+  gap: var(--reel-gap, var(--space-s));
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--reel-gap, var(--space-s));
+}
+
+.reel > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Imposter - Absolutely positioned content */
+.imposter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.imposter[data-fixed] {
+  position: fixed;
+}
+
+/* Cover - Full-height content with header/footer */
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--cover-height, 100vh);
+  padding: var(--cover-padding, var(--space-s));
+}
+
+.cover > * {
+  margin-top: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+
+.cover > :first-child:not(.cover-centered) {
+  margin-top: 0;
+}
+
+.cover > :last-child:not(.cover-centered) {
+  margin-bottom: 0;
+}
+
+.cover > .cover-centered {
+  margin-top: auto;
+  margin-bottom: auto;
+}
