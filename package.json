@@ -1,0 +1,46 @@
+{
+	"name": "eleventy-base-blog",
+	"version": "9.0.0",
+	"description": "A starter repository for a blog web site using the Eleventy site generator.",
+	"type": "module",
+	"scripts": {
+		"build": "npx @11ty/eleventy",
+		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
+		"build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+		"start": "npx @11ty/eleventy --serve --quiet",
+		"start-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
+		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
+		"debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/joxx/joachimkliemann.de"
+	},
+	"author": {
+		"name": "Joachim Kliemann",
+		"email": "joachimkliemann@gmail.com",
+		"url": "https://joachimkliemann.de/"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=22"
+	},
+	"homepage": "https://github.com/joxx/joachimkliemann.de#readme",
+	"devDependencies": {
+		"@11ty/eleventy": "^3.1.6",
+		"@11ty/eleventy-img": "^6.0.4",
+		"@11ty/eleventy-navigation": "^1.0.5",
+		"@11ty/eleventy-plugin-rss": "^3.0.0",
+		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+		"cross-env": "^10.1.0",
+		"luxon": "^3.7.2",
+		"postcss": "^8.5.8",
+		"postcss-import-glob": "^0.2.3",
+		"prismjs": "^1.30.0",
+		"zod": "^4.4.3"
+	},
+	"dependencies": {
+		"@zachleat/heading-anchors": "^1.0.5"
+	}
+}
