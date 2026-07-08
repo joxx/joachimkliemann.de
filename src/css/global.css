@@ -1,9 +1,13 @@
-@import "global/reset.css";
-/* @import 'global/fonts.css'; */
+/* Resolved natively by the browser via @import — paths are root-relative
+   and must match the passthrough copy target in eleventy.config.js
+   (src/css/global/ -> /css/global/). Glob patterns (e.g. "blocks/*.css")
+   are NOT supported by native @import; list files explicitly. */
+@import "/css/global/reset.css";
+/* @import '/css/global/fonts.css'; */
 
-@import "global/variables.css";
-/* @import 'global/global-styles.css'; */
+@import "/css/global/variables.css";
+/* @import '/css/global/global-styles.css'; */
 
-/* @import "blocks/*.css"; */
-/* @import "compositions/*.css"; */
-/* @import "utilities/*.css"; */
+/* @import "/css/blocks/example.css"; */
+/* @import "/css/compositions/example.css"; */
+/* @import "/css/utilities/example.css"; */

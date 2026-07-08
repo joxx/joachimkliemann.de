@@ -21,15 +21,25 @@
 		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
 
-		{#- Add global.css (entry point with @import globs, resolved by the
-			PostCSS transform on the `css` bundle) to the bundle #}
-		<style>{% include "src/css/global.css" %}</style>
+		{#- CSS: two modes, switched on eleventy.env.runMode (see eleventy.config.js).
+
+			Dev (`npm start`): link directly to the passthrough-copied global.css;
+			the browser resolves its @import chain natively — no build step, and
+			the dev server can hot-swap this real linked file without a full
+			page reload.
+
+			Build (`npm run build`): include global.css into the `css` bundle,
+			whose transform (postcss-import-glob) resolves every @import and
+			inlines it into one content-hashed file for production. #}
+		{%- if eleventy.env.runMode == "build" %}
+			<style>{% include "src/css/global.css" %}</style>
+			<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
+		{%- else %}
+			<link rel="stylesheet" href="/css/global.css">
+		{%- endif %}
 
 		{#- Or you can add from node_modules #}
 		{# <style>{% include "node_modules/something.css" %}</style> #}
-
-		{#- Renders the CSS bundle as a separate, content-hashed file #}
-		<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
 
 		{#- Alternative: render the bundle inline (fastest first paint), requires
 			CSP directive style-src: 'unsafe-inline' #}
