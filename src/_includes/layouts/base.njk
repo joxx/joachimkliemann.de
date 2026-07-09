@@ -26,7 +26,7 @@
 			(postcss-import-glob, see eleventy.config.js) resolves every @import
 			— plain paths and globs like "blocks/*.css" — relative to src/css/,
 			inlining everything into one content-hashed file. #}
-		<style>{% include "src/css/global.css" %}</style>
+		<style>{% include "src/assets/css/global.css" %}</style>
 		<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
 
 		{#- Or you can add from node_modules #}
@@ -41,7 +41,7 @@
 
 		{#- Example: a hand-written Web Component, no npm package or bundler
 			needed. See src/js/components/copy-code-blocks.js #}
-		<script type="module">{% include "src/js/components/copy-code-blocks.js" %}</script>
+		<script type="module">{% include "src/assets/js/components/copy-code-blocks.js" %}</script>
 	</head>
 	<body>
 		<a href="#main">Skip to main content</a>

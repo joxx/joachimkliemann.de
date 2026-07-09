@@ -1,0 +1,96 @@
+/*
+  Global styles
+
+  Low-specificity, global styles that apply to the whole
+  project: https://cube.fyi/css.html
+*/
+
+body {
+	background: var(--gray-1);
+	color: var(--gray-9);
+	font-size: var(--step-0);
+	font-family: var(--font-base);
+	line-height: var(--leading-standard);
+	font-size-adjust: from-font;
+	margin: 0;
+}
+
+:is(h1, h2, h3, h4) {
+	line-height: var(--leading-fine);
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--step-6);
+	max-width: 20ch;
+}
+
+h2 {
+	font-size: var(--step-5);
+	max-width: 35ch;
+}
+
+h3 {
+	font-size: var(--step-4);
+	max-width: 35ch;
+}
+
+:is(h4, h5, h6) {
+	font-size: var(--step-3);
+}
+
+small {
+	font-size: var(--step-0);
+}
+
+ins {
+	text-decoration: none;
+	background: var(--gray-9);
+	color: var(--gray-1);
+	padding-inline: 0.3em;
+}
+
+:is(code, kbd, samp) {
+	font-family: var(--font-mono);
+	padding: 0.2em 0.2em 0.05em 0.2em;
+	hyphens: none;
+	tab-size: 2;
+	text-align: left;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	box-decoration-break: clone;
+}
+
+/* This is quite a new property, so we want code styles to at least, not be huge or tiny */
+@supports not (font-size-adjust: from-font) {
+	:is(code, kbd, samp) {
+		font-size: 0.8em;
+	}
+}
+
+pre:has(code) {
+	width: max-content;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+pre code {
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+kbd {
+	border: 1px solid;
+	padding-block-end: 0.1em;
+}
+
+var {
+	font-style: normal;
+	font-weight: var(--font-medium);
+}
+
+q {
+	font-style: italic;
+}

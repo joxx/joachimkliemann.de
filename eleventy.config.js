@@ -30,6 +30,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig
 		.addPassthroughCopy({
 			"./src/public/": "/",
+			"./src/assets/fonts/": "/assets/fonts/",
 		})
 		.addPassthroughCopy("./src/content/feed/pretty-atom-feed.xsl");
 
@@ -39,7 +40,7 @@ export default async function (eleventyConfig) {
 	// Watch CSS files — covers global.css plus every partial under
 	// global/, blocks/, compositions/, utilities/, so adding a new file
 	// there triggers a rebuild (and re-resolves the glob imports below).
-	eleventyConfig.addWatchTarget("src/css/**/*.css");
+	eleventyConfig.addWatchTarget("src/assets/css/**/*.css");
 	// Watch images for the image pipeline.
 	eleventyConfig.addWatchTarget("src/content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -58,8 +59,8 @@ export default async function (eleventyConfig) {
 		transforms: [
 			async function (content) {
 				const result = await postcss([
-					postcssImportGlob({ cwd: "src/css" }),
-				]).process(content, { from: "src/css/global.css", to: null });
+					postcssImportGlob({ cwd: "src/assets/css" }),
+				]).process(content, { from: "src/assets/css/global.css", to: null });
 				return result.css;
 			},
 		],
