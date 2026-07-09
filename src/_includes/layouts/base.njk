@@ -21,22 +21,13 @@
 		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
 
-		{#- CSS: two modes, switched on eleventy.env.runMode (see eleventy.config.js).
-
-			Dev (`npm start`): link directly to the passthrough-copied global.css;
-			the browser resolves its @import chain natively — no build step, and
-			the dev server can hot-swap this real linked file without a full
-			page reload.
-
-			Build (`npm run build`): include global.css into the `css` bundle,
-			whose transform (postcss-import-glob) resolves every @import and
-			inlines it into one content-hashed file for production. #}
-		{%- if eleventy.env.runMode == "build" %}
-			<style>{% include "src/css/global.css" %}</style>
-			<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
-		{%- else %}
-			<link rel="stylesheet" href="/css/global.css">
-		{%- endif %}
+		{#- CSS: same pipeline in dev (`npm start`) and production (`npm run
+			build`). global.css is added to the `css` bundle; its transform
+			(postcss-import-glob, see eleventy.config.js) resolves every @import
+			— plain paths and globs like "blocks/*.css" — relative to src/css/,
+			inlining everything into one content-hashed file. #}
+		<style>{% include "src/css/global.css" %}</style>
+		<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">
 
 		{#- Or you can add from node_modules #}
 		{# <style>{% include "node_modules/something.css" %}</style> #}
@@ -47,6 +38,10 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+
+		{#- Example: a hand-written Web Component, no npm package or bundler
+			needed. See src/js/components/copy-code-blocks.js #}
+		<script type="module">{% include "src/js/components/copy-code-blocks.js" %}</script>
 	</head>
 	<body>
 		<a href="#main">Skip to main content</a>
@@ -67,7 +62,9 @@
 
 		<main id="main">
 			<heading-anchors>
-				{{ content | safe }}
+				<copy-code-blocks>
+					{{ content | safe }}
+				</copy-code-blocks>
 			</heading-anchors>
 		</main>
 

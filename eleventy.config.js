@@ -12,8 +12,6 @@ import postcssImportGlob from "postcss-import-glob";
 
 import pluginFilters from "./src/_config/filters.js";
 
-const isBuild = process.env.ELEVENTY_RUN_MODE === "build";
-
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
@@ -35,21 +33,12 @@ export default async function (eleventyConfig) {
 		})
 		.addPassthroughCopy("./src/content/feed/pretty-atom-feed.xsl");
 
-	// Dev-mode only: global.css and its partials are served as real files at
-	// root-relative URLs so the browser can resolve @import natively during
-	// `npm start`. In production (`npm run build`) they're instead resolved
-	// and inlined into the `css` bundle below — see base.njk for the switch.
-	if (!isBuild) {
-		eleventyConfig.addPassthroughCopy({
-			"./src/css/global.css": "/css/global.css",
-			"./src/css/global/": "/css/global/",
-		});
-	}
-
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
-	// Watch CSS files
+	// Watch CSS files — covers global.css plus every partial under
+	// global/, blocks/, compositions/, utilities/, so adding a new file
+	// there triggers a rebuild (and re-resolves the glob imports below).
 	eleventyConfig.addWatchTarget("src/css/**/*.css");
 	// Watch images for the image pipeline.
 	eleventyConfig.addWatchTarget("src/content/**/*.{svg,webp,png,jpg,jpeg,gif}");
@@ -57,30 +46,28 @@ export default async function (eleventyConfig) {
 	// Per-page bundles, see https://github.com/11ty/eleventy-plugin-bundle
 	// Bundle <style> content and adds a {% css %} paired shortcode
 	eleventyConfig.addBundle("css", {
-		toFileDirectory: "dist",
+		toFileDirectory: "assets/css",
 		// Add all <style> content to `css` bundle (use <style eleventy:ignore> to opt-out)
 		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
 		bundleHtmlContentFromSelector: "style",
-		// Production only: resolve @import rules (plain paths and globs, e.g.
-		// `@import "blocks/*.css";`) relative to src/css/, inlining everything
-		// into a single bundled file. Skipped during `npm start` — see the
-		// passthrough copy above and base.njk, where the browser resolves
-		// @import natively instead so there's no build step in the dev loop.
-		transforms: isBuild
-			? [
-					async function (content) {
-						const result = await postcss([
-							postcssImportGlob({ cwd: "src/css" }),
-						]).process(content, { from: "src/css/global.css", to: null });
-						return result.css;
-					},
-				]
-			: [],
+		// Same pipeline in dev (`npm start`) and production (`npm run build`):
+		// resolve every @import in global.css — plain paths and globs alike
+		// (e.g. `@import "blocks/*.css";`) — relative to src/css/, inlining
+		// everything into one bundled file. A minifier (e.g. cssnano) can be
+		// added to this transform chain later for production.
+		transforms: [
+			async function (content) {
+				const result = await postcss([
+					postcssImportGlob({ cwd: "src/css" }),
+				]).process(content, { from: "src/css/global.css", to: null });
+				return result.css;
+			},
+		],
 	});
 
 	// Bundle <script> content and adds a {% js %} paired shortcode
 	eleventyConfig.addBundle("js", {
-		toFileDirectory: "dist",
+		toFileDirectory: "assets/js",
 		// Add all <script> content to the `js` bundle (use <script eleventy:ignore> to opt-out)
 		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
 		bundleHtmlContentFromSelector: "script",
