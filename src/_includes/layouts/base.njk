@@ -7,6 +7,15 @@
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
+		{#- Mona Sans is used for body copy and headings (see --font-base in
+			variables.css) and is on the critical rendering path for nearly
+			every element, so preload it to start the fetch alongside the
+			HTML parse instead of waiting on CSSOM/style computation. Fonts
+			are always fetched in CORS mode per spec, so `crossorigin` is
+			required here even though the file is same-origin — omitting it
+			causes the browser to fetch the file twice. #}
+		<link rel="preload" href="/assets/fonts/MonaSans.woff2" as="font" type="font/woff2" crossorigin>
+
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
 		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
 
