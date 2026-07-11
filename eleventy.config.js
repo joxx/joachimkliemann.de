@@ -9,6 +9,7 @@ import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import postcss from "postcss";
 import postcssImportGlob from "postcss-import-glob";
+import postcssCustomMedia from "postcss-custom-media";
 
 import pluginFilters from "./src/_config/filters.js";
 
@@ -58,9 +59,19 @@ export default async function (eleventyConfig) {
 		// added to this transform chain later for production.
 		transforms: [
 			async function (content) {
-				const result = await postcss([
+				// Run in two separate passes: postcss-import-glob resolves
+				// @import asynchronously, and plugins that need to see the
+				// fully-merged tree (like postcss-custom-media) can miss
+				// content if they run in the same postcss([...]) call as
+				// the importer. Splitting into two process() calls avoids it.
+				const imported = await postcss([
 					postcssImportGlob({ cwd: "src/assets/css" }),
 				]).process(content, { from: "src/assets/css/global.css", to: null });
+
+				const result = await postcss([postcssCustomMedia()]).process(
+					imported.css,
+					{ from: "src/assets/css/global.css", to: null },
+				);
 				return result.css;
 			},
 		],

@@ -67,3 +67,7 @@
 	--radius-l: 2.5rem;
 	--uppercase-kerning: 0.04ch;
 }
+
+@custom-media --sm (min-width: 40rem);
+@custom-media --md (min-width: 48rem);
+@custom-media --lg (min-width: 64rem);
