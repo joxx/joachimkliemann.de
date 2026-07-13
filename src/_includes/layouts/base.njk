@@ -55,21 +55,25 @@
 	<body>
 		<a href="#main">Skip to main content</a>
 
-		<header>
-			<a href="/">{{ metadata.title }}</a>
+		<header class="site-head wrapper">
+			<div class="sidebar">
+				<div class="site-head__brand">
+					<a href="/">{{ metadata.title }}</a>
+				</div>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2>Mop level navigation menu</h2>
-				<ul>
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
+				{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+				<nav class="nav">
+					<h2 class="visually-hidden">Mop level navigation menu</h2>
+					<ul>
+					{%- for entry in collections.all | eleventyNavigation %}
+						<li><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
+					{%- endfor %}
+					</ul>
+				</nav>
+			</div>
 		</header>
 
-		<main id="main">
+		<main id="main" class="wrapper">
 			<heading-anchors>
 				<copy-code-blocks>
 					{{ content | safe }}

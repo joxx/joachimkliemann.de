@@ -10,13 +10,13 @@ body {
 	color: var(--color-text-default);
 	font-size: var(--step-0);
 	font-family: var(--font-base);
-	line-height: var(--leading-standard);
+	line-height: var(--leading-l);
 	font-size-adjust: from-font;
 	margin: 0;
 }
 
 :is(h1, h2, h3, h4) {
-	line-height: var(--leading-fine);
+	line-height: var(--leading-m);
 	text-wrap: balance;
 }
 
@@ -183,7 +183,7 @@ table {
 th {
 	text-align: left;
 	font-weight: var(--font-bold);
-	line-height: var(--leading-fine);
+	line-height: var(--leading-m);
 }
 
 thead th {
@@ -308,7 +308,7 @@ form > *:not(input[type="hidden"]) + * {
 }
 
 label {
-	line-height: var(--leading-fine);
+	line-height: var(--leading-m);
 	font-weight: var(--font-medium);
 }
 
