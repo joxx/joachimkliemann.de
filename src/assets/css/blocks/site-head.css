@@ -1,0 +1,15 @@
+.site-head {
+  --site-head-border: var(--stroke-width) solid var(--color-dark);
+  --gutter: 0 var(--space-s);
+  --cluster-horizontal-alignment: flex-end;
+  --sidebar-target-width: 20ch;
+  --sidebar-content-min-width: 60%;
+
+  text-transform: uppercase;
+  letter-spacing: var(--uppercase-kerning);
+  line-height: var(--leading-s);
+  font-size: var(--step-0);
+  font-weight: var(--font-bold);
+  position: relative;
+  padding-block: var(--space-m);
+}
