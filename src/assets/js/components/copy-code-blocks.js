@@ -32,6 +32,7 @@ class CopyCodeBlocks extends HTMLElement {
 				fontSize: "0.75em",
 				padding: "0.25em 0.6em",
 				cursor: "pointer",
+				backgroundColor: "plum",
 			});
 
 			button.addEventListener("click", () => this.copy(pre, button));
