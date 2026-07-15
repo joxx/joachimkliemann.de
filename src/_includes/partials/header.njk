@@ -4,7 +4,7 @@
 			<a href="/">{{ metadata.title }}</a>
 		</div>
 		{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-		<nav class="nav" aria-labeledby="primary-navigation">
+		<nav class="nav" aria-labelledby="primary-navigation">
 			<h2 id="primary-navigation" class="visually-hidden">Top level navigation menu</h2>
 			<ul class="cluster" role="list">
 			{%- for entry in collections.all | eleventyNavigation %}
