@@ -62,7 +62,6 @@
 
 @media (--sm) {
 	.prose :is(h1, h2, h3) {
-		background-color: var(--color-brand-accent-1);
 		overflow-wrap: unset;
 		hyphens: unset;
 	}
