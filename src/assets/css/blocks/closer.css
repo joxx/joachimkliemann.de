@@ -1,0 +1,11 @@
+.closer {
+	color: var(--color-light);
+	padding-block: clamp(10rem, 50vb, 20rem) var(--gutter);
+}
+
+.closer svg[role="img"][width][height] {
+	width: 100%;
+	height: auto;
+	background: unset;
+	padding: unset;
+}

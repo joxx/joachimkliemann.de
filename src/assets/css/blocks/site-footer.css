@@ -1,0 +1,10 @@
+.site-footer {
+	background: var(--color-dark);
+	color: var(--color-light);
+	line-height: var(--leading-m);
+	padding-block: var(--space-m);
+}
+
+.site-footer .wrapper * {
+	margin: 0;
+}
