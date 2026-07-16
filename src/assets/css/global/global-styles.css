@@ -9,13 +9,14 @@ body {
 	background: var(--color-bg-default);
 	color: var(--color-text-default);
 	font-size: var(--step-0);
-	font-family: var(--font-base);
+	font-family: var(--font-sans);
 	line-height: var(--leading-l);
 	font-size-adjust: from-font;
 	margin: 0;
 }
 
 :is(h1, h2, h3, h4) {
+	font-family: var(--font-serif);
 	line-height: var(--leading-m);
 	text-wrap: balance;
 }

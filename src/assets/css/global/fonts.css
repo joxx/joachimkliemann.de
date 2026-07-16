@@ -32,3 +32,31 @@
 		url(/assets/fonts/MonaSans.woff2) format("woff2 supports variations"),
 		url(/assets/fonts/MonaSans.woff2) format("woff2-variations");
 }
+
+/* charis-sil-regular - latin */
+@font-face {
+	font-display: swap;
+	font-family: "Charis SIL";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/assets/fonts/charis-sil-v2-latin-regular.woff2") format("woff2");
+}
+
+/* charis-sil-700 - latin */
+@font-face {
+	font-display: swap;
+	font-family: "Charis SIL";
+	font-style: normal;
+	font-weight: 700;
+	src: url("/assets/fonts/charis-sil-v2-latin-700.woff2") format("woff2");
+}
+
+/* dm-serif-text-regular - latin */
+@font-face {
+	font-display: swap;
+	font-family: "DM Serif Text";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/assets/fonts/dm-serif-text-v13-latin-regular.woff2")
+		format("woff2");
+}

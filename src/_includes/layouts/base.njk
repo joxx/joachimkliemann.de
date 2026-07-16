@@ -7,7 +7,7 @@
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
-		{#- Mona Sans is used for body copy and headings (see --font-base in
+		{#- Mona Sans is used for body copy and headings (see --font-sans in
 			variables.css) and is on the critical rendering path for nearly
 			every element, so preload it to start the fetch alongside the
 			HTML parse instead of waiting on CSSOM/style computation. Fonts
