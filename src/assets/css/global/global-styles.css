@@ -16,7 +16,7 @@ body {
 }
 
 :is(h1, h2, h3, h4) {
-	font-family: var(--font-serif);
+	font-family: var(--font-sans);
 	line-height: var(--leading-m);
 	text-wrap: balance;
 }
